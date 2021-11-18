@@ -8,6 +8,7 @@ class BackmanagerApplicationTests {
 
 	@Test
 	void contextLoads() {
+		TestCreatePDF testCreatePDF = new TestCreatePDF();
 	}
 
 }
