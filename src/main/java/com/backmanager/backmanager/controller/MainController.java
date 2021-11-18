@@ -14,4 +14,8 @@ public class MainController {
     public String name() {
         return null;
     }
+    @RequestMapping("")
+    public void man(){
+
+    }
 }
