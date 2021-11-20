@@ -17,13 +17,7 @@ public class ReController {
     
     @RequestMapping("/hello")
     public String ss(){
-        
         System.out.println("ssss");
         return "ssss";
-    }
-
-    @RequestMapping("/ge")
-    public String get(){
-        return null;
     }
 }

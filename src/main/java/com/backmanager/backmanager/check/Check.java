@@ -3,7 +3,6 @@ package com.backmanager.backmanager.check;
 import com.backmanager.backmanager.po.OracleDataBaseInfo;
 
 public class Check {
-    private static boolean flag = false;
     /**
      * 
      * @param param
@@ -54,5 +53,13 @@ public class Check {
             return false;
         }
         return true;
+    }
+
+    public static boolean checkObjectMustExist(Object object) {
+        if(object == null){
+            return false;
+        } else {
+            return true;
+        }
     }
 }
