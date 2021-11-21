@@ -8,6 +8,7 @@ import com.backmanager.backmanager.dbtools.handler.QueryOracleConntionHandlder;
 import com.backmanager.backmanager.po.OracleDataBaseInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,11 +27,12 @@ public class OracleController {
     @Autowired
     QueryOracleConntionHandlder qoc;
     
-    /**
+    /** 
      * 创建数据库连接
      * @param odb
      * @return
      */
+    @CrossOrigin
     @RequestMapping("/createConnection")
     public HashMap<String,String> createConnect(OracleDataBaseInfo odb) {
         

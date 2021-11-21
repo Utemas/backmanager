@@ -32,8 +32,8 @@ public class Check {
         return true;
     }
     /**
-     * 
-     * @param odb
+     * 创建连接时的比输入项
+     * @param odb Oraccle连接信息
      * @return
      */
     public static boolean checkOracleConnectMustInput(OracleDataBaseInfo odb){

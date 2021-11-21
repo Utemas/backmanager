@@ -20,11 +20,21 @@ public class DeleteOracleConnectionHandler {
     public HashMap<String,String> doMethod(OracleDataBaseInfo odb) {
         hm.clear();
         if("1".equals(odb.getSaveFlag())){//保存的删redis
-            boolean deleteResult = rt.delete("oraclce:"+odb.getCustId()+":"+odb.getConnectName());
+            String redisKey = "oraclce:"+odb.getCustId()+":"+odb.getConnectName();
+            boolean deleteResult = false;
+            if(rt.hasKey(redisKey)){
+                deleteResult = rt.delete(redisKey);
+            } else {
+                hm.clear();
+                hm.put("retFlg", "false");
+                hm.put("retMsg", "connection data is disappear");
+                return hm;
+            }
             if(!deleteResult){
                 hm.clear();
                 hm.put("retFlg", "false");
                 hm.put("retMsg", "delete failed");
+                return hm;
             }
             hm.put("retFlg", "true");
             hm.put("retMsg", "delete successed");

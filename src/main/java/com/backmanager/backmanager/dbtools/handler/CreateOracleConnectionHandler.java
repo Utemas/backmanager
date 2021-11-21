@@ -47,7 +47,6 @@ public class CreateOracleConnectionHandler{
                 }
                 Connection  c1  = AbourDataBase.connectOracle(odb.getIp(),odb.getDbUsrNa(),odb.getPassword(),odb.getPort(),odb.getSid());
                 if(c1 != null){
-                    
                     synchronized(this) {
                         HashMap<String,String> connectMap = new HashMap<String,String>();
                         connectMap.put("ip",odb.getIp());

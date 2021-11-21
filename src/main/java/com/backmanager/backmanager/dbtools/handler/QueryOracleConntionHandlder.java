@@ -31,22 +31,32 @@ public class QueryOracleConntionHandlder {
             odbMap.put("odb",odb);
             return odbMap;
         }
+        String queryKey = "oracle:"+odb.getCustId()+":"+odb.getConnectName();
+        if(!rt.hasKey(queryKey)){
+            odbMap.put("retFlg", "false");
+            odbMap.put("retMsg", "connection is disappear");
+            odbMap.put("odb",odb);
+            return odbMap;
+        }
         if("1".equals(odb.getSaveFlag())){ //保存的数据库连接信息在redis里
             synchronized(this) {
-                String password = String.valueOf(rt.opsForHash().get("oracle:"+odb.getCustId()+":"+odb.getConnectName(), "password"));
-                String dbUsrNa = String.valueOf(rt.opsForHash().get("oracle:"+odb.getCustId()+":"+odb.getConnectName(), "dbUsrNa"));
-                String port = String.valueOf(rt.opsForHash().get("oracle:"+odb.getCustId()+":"+odb.getConnectName(), "port"));
-                String ip = String.valueOf(rt.opsForHash().get("oracle:"+odb.getCustId()+":"+odb.getConnectName(), "ip"));
-                String sid = String.valueOf(rt.opsForHash().get("oracle:"+odb.getCustId()+":"+odb.getConnectName(), "sid"));
-                String serviceName = String.valueOf(rt.opsForHash().get("oracle:"+odb.getCustId()+":"+odb.getConnectName(), "serviceName"));
+                String password = String.valueOf(rt.opsForHash().get(queryKey, "password"));
+                String dbUsrNa = String.valueOf(rt.opsForHash().get(queryKey, "dbUsrNa"));
+                String port = String.valueOf(rt.opsForHash().get(queryKey, "port"));
+                String ip = String.valueOf(rt.opsForHash().get(queryKey, "ip"));
+                String sid = String.valueOf(rt.opsForHash().get(queryKey, "sid"));
+                String serviceName = String.valueOf(rt.opsForHash().get(queryKey, "serviceName"));
                 odb.setPassword(password);
                 odb.setDbUsrNa(dbUsrNa);
                 odb.setIp(ip);
                 odb.setPort(port);
                 odb.setSid(sid);
                 odb.setServiceName(serviceName);
+                odbMap.put("retFlg", "true");
+                odbMap.put("retMsg", "Query successed");
                 odbMap.put("odb", odb);
                 return odbMap;
+                
             }
         } else {
             odbMap.clear();
